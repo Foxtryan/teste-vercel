@@ -14,7 +14,7 @@ function App() {
     })
 
     if (error) {
-      alert(`Erro no login: ${error.message})`)
+      alert(`Erro no login: ${error.message}`)
     } else {
       alert("Login realizado com sucesso!")
     }
