@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
 
+// app
 function App() {
   const [usuario, setUsuario] = useState('')
   const [senha, setSenha] = useState('')
