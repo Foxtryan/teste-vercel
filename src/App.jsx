@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { supabase } from './supabaseClient'
 
 function App() {
   const [usuario, setUsuario] = useState('')
@@ -6,21 +7,16 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({usuario,senha}),
-      });
 
-      const data = await response.json()
-      if (response.ok) {
-        alert(`Sucesso: ${data.message}`)
-      } else {
-        alert(`Erro: ${data.message}`)
-      }
-    } catch (error) {
-      alert("Erro ao conectar ao servidor.")
+    const { data, error} = await supabase.auth.signInWithPassword({
+      email: usuario,
+      password: senha,
+    })
+
+    if (error) {
+      alert(`Erro no login: ${error.message})`)
+    } else {
+      alert("Login realizado com sucesso!")
     }
   };
 
